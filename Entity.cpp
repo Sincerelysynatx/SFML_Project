@@ -11,27 +11,27 @@ Entity::Entity(int x, int y, int width, int height, string imageName)
   m_y = y;
   m_width = width;
   m_height = height;
-  
+
   if (!m_texture.loadFromFile(imageName))
   {
     cout<<"Failed to load spritesheet!"<<endl;
   }
 
   m_movement.x = 0.0f;
-  m_movement.y = 0.0f;  
+  m_movement.y = 0.0f;
 
   m_speed = 5.0f;
 
   m_maxSpeed = 100.0f;
 
-  
+
   // set up the animations for all four directions (set spritesheet and push frames)
   m_walkingAnimationDown.setSpriteSheet(m_texture);
   m_walkingAnimationDown.addFrame(sf::IntRect(m_width * 1, m_height * 0, m_width, m_height));
   m_walkingAnimationDown.addFrame(sf::IntRect(m_width * 2, m_height * 0, m_width, m_height));
   m_walkingAnimationDown.addFrame(sf::IntRect(m_width * 1, m_height * 0, m_width, m_height));
   m_walkingAnimationDown.addFrame(sf::IntRect(m_width * 0, m_height * 0, m_width, m_height));
-  
+
   m_walkingAnimationLeft.setSpriteSheet(m_texture);
   m_walkingAnimationLeft.addFrame(sf::IntRect(m_width * 1, m_height * 1, m_width, m_height));
   m_walkingAnimationLeft.addFrame(sf::IntRect(m_width * 2, m_height * 1, m_width, m_height));
@@ -90,10 +90,10 @@ void Entity::Update(sf::Time &frameTime)
     m_movement.x += m_speed;
     noKeyWasPressed = false;
   }
-  
+
   if (sqrt(m_movement.x * m_movement.x + m_movement.y * m_movement.y) > m_maxSpeed)
   {
-    
+
   }
 
   m_animatedSprite->play(*m_currentAnimation);
@@ -103,14 +103,7 @@ void Entity::Update(sf::Time &frameTime)
   if (noKeyWasPressed)
   {
       m_animatedSprite->stop();
-      if (m_movement.x > 0)
-        m_movement.x -= 10;
-      if (m_movement.x < 0)
-        m_movement.x += 10;
-      if (m_movement.y > 0)
-        m_movement.y -= 10;
-      if (m_movement.y < 0)
-        m_movement.y += 10;
+
   }
   noKeyWasPressed = true;
 
